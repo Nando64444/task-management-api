@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Task Management API
 
 This Task Management System is a web application built using NestJS, TypeScript, Prisma, and Docker. It allows you to manage tasks, organize them in lists, add tags, and create subtasks. Below, you will find information on setting up, running, and using this application.
@@ -62,3 +63,50 @@ Once the application is up and running, you can use it to manage your tasks, lis
 - Lists: Organize your tasks into lists for better task management.
 - Tags: Add and manage tags to categorize your tasks and make them easier to find.
 - Subtasks: Create subtasks for more detailed task management.
+=======
+# Task Management API 🚀
+**A modern, secure RESTful backend for task tracking and organization.**
+
+Built with **NestJS**, **TypeScript**, **Prisma ORM**, **PostgreSQL**, and **JWT authentication**. Supports full CRUD for tasks, lists, tags, subtasks, user registration/login, and proper authorization (only owners can access/modify their data).
+
+This project is ideal as a backend foundation for todo apps, productivity tools, or learning advanced NestJS patterns.
+
+Live Swagger docs: [http://localhost:3000/api](http://localhost:3000/api) (after running locally)
+
+## ✨ Features
+
+- **User Authentication** — Register/login with email + password, JWT tokens
+- **Task Management** — Create, read, update, delete tasks with title, description, due date, priority, status
+- **Lists & Organization** — Group tasks into customizable lists
+- **Tags** — Add multiple labels/tags to tasks for filtering
+- **Subtasks** — Hierarchical subtasks for complex items
+- **Validation & Error Handling** — Class-validator + custom exceptions
+- **API Documentation** — Built-in Swagger UI/OpenAPI
+- **Docker & PostgreSQL** — Easy setup with Docker Compose
+- **Prisma ORM** — Type-safe database queries and migrations
+- **Modular Structure** — Clean architecture (controllers, services, modules)
+
+## 🛠 Tech Stack
+
+- **Backend**: NestJS (v10+)
+- **Language**: TypeScript
+- **Database**: PostgreSQL + Prisma ORM
+- **Auth**: JWT (passport-jwt)
+- **Validation**: class-validator + class-transformer
+- **Docs**: @nestjs/swagger
+- **Dev Tools**: Docker, ESLint, Prettier, Pactum (for API testing)
+
+## 📋 Prerequisites
+
+- Node.js ≥ 18
+- npm or yarn
+- PostgreSQL (or Docker for easy setup)
+- Git
+
+## 🚀 Quick Start
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/Nando64444/task-management-api
+   cd task-management-api
+>>>>>>> acfd92f177462d3a5bd5ecafcedd701d97357fd9
