@@ -6,15 +6,14 @@ services:
     ports:
       - 5434:5432
     environment:
-      POSTGRES_USER: heliodarko
-      POSTGRES_PASSWORD: 48shd-KSU024-asSA783-asqipzlsAKS-0327ZNAskqoe
-      POSTGRES_DB: nest-task
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     networks:
       - taskmanagement
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U heliodarko -d nest-task -h localhost -p 5432"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres -h localhost -p 5432"]
       interval: 5s
       timeout: 5s
       retries: 5
