@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
@@ -96,3 +97,117 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+=======
+<<<<<<< HEAD
+# Task Management API
+
+This Task Management System is a web application built using NestJS, TypeScript, Prisma, and Docker. It allows you to manage tasks, organize them in lists, add tags, and create subtasks. Below, you will find information on setting up, running, and using this application.
+
+## Getting Started
+These instructions will help you set up and run the Task Management System on your local machine.
+
+### Prerequisites
+Make sure you have the following tools installed on your machine:
+
+- Node.js
+- Docker
+### Installation
+1. Clone the repository:
+
+```shell
+git clone https://github.com/helioLJ/task-management-api
+cd task-management-api
+```
+2. Install project dependencies:
+
+```shell
+npm install
+```
+
+3. Create a .env and .env.test file in the project root and configure the environment variables as needed. You may want to configure the database connection settings and other environment-specific variables.
+
+```shell
+DATABASE_URL= // take this URL from docker-compose file
+JWT_SECRET= // your secret
+```
+
+### Running the Application
+To start the application, run the following commands:
+
+```shell
+# Start the PostgreSQL database in a Docker container
+npm run db:dev:up
+
+# Run the NestJS application
+npm run start:dev
+```
+
+The application should now be accessible at http://localhost:3000.
+
+
+### Database Migration
+If you make changes to the data model (e.g., add new tables or modify existing ones), you can create a new database migration using Prisma. After making the changes, run the following commands:
+
+```shell
+# Generate a new migration
+npm run prisma:dev:deploy
+```
+
+## API Documentation
+The application provides an API with several endpoints for managing tasks, lists, tags, and subtasks. You can explore the API documentation by accessing the Swagger UI at http://localhost:3000/api.
+
+## Usage
+Once the application is up and running, you can use it to manage your tasks, lists, tags, and subtasks. Here are some of the key features:
+
+- Tasks: Create, update, and delete tasks. Assign due dates, tags, and organize them into lists.
+- Lists: Organize your tasks into lists for better task management.
+- Tags: Add and manage tags to categorize your tasks and make them easier to find.
+- Subtasks: Create subtasks for more detailed task management.
+=======
+# Task Management API 🚀
+**A modern, secure RESTful backend for task tracking and organization.**
+
+Built with **NestJS**, **TypeScript**, **Prisma ORM**, **PostgreSQL**, and **JWT authentication**. Supports full CRUD for tasks, lists, tags, subtasks, user registration/login, and proper authorization (only owners can access/modify their data).
+
+This project is ideal as a backend foundation for todo apps, productivity tools, or learning advanced NestJS patterns.
+
+Live Swagger docs: [http://localhost:3000/api](http://localhost:3000/api) (after running locally)
+
+## ✨ Features
+
+- **User Authentication** — Register/login with email + password, JWT tokens
+- **Task Management** — Create, read, update, delete tasks with title, description, due date, priority, status
+- **Lists & Organization** — Group tasks into customizable lists
+- **Tags** — Add multiple labels/tags to tasks for filtering
+- **Subtasks** — Hierarchical subtasks for complex items
+- **Validation & Error Handling** — Class-validator + custom exceptions
+- **API Documentation** — Built-in Swagger UI/OpenAPI
+- **Docker & PostgreSQL** — Easy setup with Docker Compose
+- **Prisma ORM** — Type-safe database queries and migrations
+- **Modular Structure** — Clean architecture (controllers, services, modules)
+
+## 🛠 Tech Stack
+
+- **Backend**: NestJS (v10+)
+- **Language**: TypeScript
+- **Database**: PostgreSQL + Prisma ORM
+- **Auth**: JWT (passport-jwt)
+- **Validation**: class-validator + class-transformer
+- **Docs**: @nestjs/swagger
+- **Dev Tools**: Docker, ESLint, Prettier, Pactum (for API testing)
+
+## 📋 Prerequisites
+
+- Node.js ≥ 18
+- npm or yarn
+- PostgreSQL (or Docker for easy setup)
+- Git
+
+## 🚀 Quick Start
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/Nando64444/task-management-api
+   cd task-management-api
+>>>>>>> acfd92f177462d3a5bd5ecafcedd701d97357fd9
+>>>>>>> 234bec5f03c86a21f1d225ec3fac1744cc5031da

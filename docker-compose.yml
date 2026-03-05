@@ -1,0 +1,40 @@
+version: '3.8'   # puedes borrarla si quieres quitar el warning
+
+services:
+  dev-db:
+    image: postgres:15
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: heliodarko
+      POSTGRES_PASSWORD: 48shd-KSU024-asSA783-asqipzlsAKS-0327ZNAskqoe
+      POSTGRES_DB: nest-task
+    networks:
+      - taskmanagement
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U heliodarko -d nest-task -h localhost -p 5432"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env                        # ← ESTA LÍNEA ES OBLIGATORIA
+    depends_on:
+      dev-db:
+        condition: service_healthy
+    networks:
+      - taskmanagement
+
+volumes:
+  postgres-data:
+
+networks:
+  taskmanagement:
