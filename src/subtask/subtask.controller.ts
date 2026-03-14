@@ -7,12 +7,15 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SubtaskService } from './subtask.service';
 import { CreateSubtaskDto } from './dto/create-subtask.dto';
 import { UpdateSubtaskDto } from './dto/update-subtask.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/decorator/get-user.decorator';
 
+@ApiTags('subtask')
+@ApiBearerAuth('JWT-auth')
 @UseGuards(AuthGuard('jwt'))
 @Controller('subtask')
 export class SubtaskController {
@@ -36,3 +39,4 @@ export class SubtaskController {
     return this.subtaskService.remove(+id);
   }
 }
+
