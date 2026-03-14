@@ -23,7 +23,7 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('tasks')
-@ApiBearerAuth('access-token')
+@ApiBearerAuth('JWT-auth')
 @UseGuards(AuthGuard('jwt'))
 @Controller('task')
 export class TaskController {
@@ -85,3 +85,4 @@ export class TaskController {
     return this.taskService.remove(+id, userId);
   }
 }
+

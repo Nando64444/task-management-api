@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { TagService } from './tag.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
@@ -15,6 +16,8 @@ import { UpdateTagDto } from './dto/update-tag.dto';
 import { GetUser } from '../auth/decorator/get-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
 
+@ApiTags('tag')
+@ApiBearerAuth('JWT-auth')
 @UseGuards(AuthGuard('jwt'))
 @Controller('tag')
 export class TagController {
@@ -44,3 +47,4 @@ export class TagController {
     return this.tagService.remove(+id, userId);
   }
 }
+

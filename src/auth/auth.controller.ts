@@ -1,40 +1,42 @@
-<<<<<<< HEAD
-import { Controller, Post, Body } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register.dto';
-import { LoginDto } from './dto/login.dto';
-
-@Controller('auth')
-export class AuthController {
-  constructor(private authService: AuthService) {}
-
-  @Post('register')
-  register(@Body() dto: RegisterDto) {
-    return this.authService.register(dto.email, dto.password);
-  }
-
-  @Post('login')
-  login(@Body() dto: LoginDto) {
-    return this.authService.login(dto.email, dto.password);
-=======
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiBody,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
 
+type AuthTokenResponse = { access_token: string };
+
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiOperation({ summary: 'Register a new user' })
+  @ApiBody({ type: CreateAuthDto })
+  @ApiCreatedResponse({ description: 'User registered successfully' })
+  @ApiBadRequestResponse({ description: 'Invalid payload' })
+  @ApiForbiddenResponse({ description: 'Credentials taken' })
   @Post('register')
-  register(@Body() createAuthDto: CreateAuthDto) {
+  async register(@Body() createAuthDto: CreateAuthDto): Promise<AuthTokenResponse> {
     return this.authService.register(createAuthDto);
   }
 
+  @ApiOperation({ summary: 'Login with email and password' })
+  @ApiBody({ type: LoginAuthDto })
+  @ApiOkResponse({ description: 'Login successful' })
+  @ApiBadRequestResponse({ description: 'Invalid payload' })
+  @ApiForbiddenResponse({ description: 'Credentials incorrect' })
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  login(@Body() loginAuthDto: LoginAuthDto) {
+  async login(@Body() loginAuthDto: LoginAuthDto): Promise<AuthTokenResponse> {
     return this.authService.login(loginAuthDto);
->>>>>>> 234bec5f03c86a21f1d225ec3fac1744cc5031da
   }
 }
