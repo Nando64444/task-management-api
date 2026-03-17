@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   IsOptional,
@@ -7,63 +7,64 @@ import {
   IsDateString,
   IsArray,
   IsNumber,
+  ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateSubtaskDto {
-  @ApiProperty({ example: 'Review code' })
+  @ApiProperty({ example: 'Review the document' })
   @IsString()
   @IsNotEmpty()
   title: string;
 
-  @ApiPropertyOptional({ example: false })
+  @ApiProperty({ example: false, required: false })
   @IsOptional()
   @IsBoolean()
   completed?: boolean;
 }
 
 export class CreateTaskDto {
-  @ApiProperty({ example: 'Build task API' })
+  @ApiProperty({ example: 'Enviar documento' })
   @IsString()
   @IsNotEmpty()
   title: string;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ example: 'esto es un documento', required: false })
   @IsOptional()
   @IsString()
   description?: string;
 
-  @ApiPropertyOptional({ example: false })
+  @ApiProperty({ example: false, required: false })
   @IsOptional()
   @IsBoolean()
   completed?: boolean;
 
-  @ApiPropertyOptional({ example: '2026-04-15' })
+  @ApiProperty({
+    example: '2026-04-15T23:59:59.999Z',
+    description: 'Full ISO 8601 date with time (Prisma requires this)',
+  })
   @IsOptional()
   @IsDateString()
   dueDate?: string;
 
-  @ApiPropertyOptional({ example: 'work' })
+  @ApiProperty({ example: 'work' })
   @IsOptional()
   @IsString()
   list?: string;
 
-  // ── Now added: support for tags & subtasks ───────────────────────────────
-  @ApiPropertyOptional({
-    example: [1, 3],
-    description: 'Array of existing tag IDs to attach',
-  })
+  @ApiProperty({ example: [1, 3] })
   @IsOptional()
   @IsArray()
   @IsNumber({}, { each: true })
   tagIds?: number[];
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: [CreateSubtaskDto],
-    description: 'Optional array of subtasks to create together with the task',
+    example: [{ title: 'Subtask 1' }],
   })
   @IsOptional()
   @IsArray()
+  @ValidateNested({ each: true })
   @Type(() => CreateSubtaskDto)
   subtasks?: CreateSubtaskDto[];
 }

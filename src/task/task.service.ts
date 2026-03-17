@@ -16,16 +16,16 @@ export class TaskService {
 
     return this.prisma.task.create({
       data: {
-        ...taskData,
+        ...taskData,           // ← dueDate is now a real Date object
         userId,
         ...(tagIds?.length && {
           tags: {
-            connect: tagIds.map(id => ({ id })),
+            connect: tagIds.map((id) => ({ id })),
           },
         }),
         ...(subtasks?.length && {
           subtasks: {
-            create: subtasks.map(s => ({
+            create: subtasks.map((s) => ({
               title: s.title,
               completed: s.completed ?? false,
             })),
@@ -86,14 +86,14 @@ export class TaskService {
 
     let tagsUpdate;
     if (tagIds !== undefined) {
-      tagsUpdate = { set: tagIds.map(id => ({ id })) };
+      tagsUpdate = { set: tagIds.map((id) => ({ id })) };
     } else if (tagsOperation) {
       tagsUpdate = {};
       if (tagsOperation.add?.length) {
-        tagsUpdate.connect = tagsOperation.add.map(id => ({ id }));
+        tagsUpdate.connect = tagsOperation.add.map((id) => ({ id }));
       }
       if (tagsOperation.remove?.length) {
-        tagsUpdate.disconnect = tagsOperation.remove.map(id => ({ id }));
+        tagsUpdate.disconnect = tagsOperation.remove.map((id) => ({ id }));
       }
       if (Object.keys(tagsUpdate).length === 0) tagsUpdate = undefined;
     }
@@ -101,7 +101,7 @@ export class TaskService {
     let subtasksUpdate;
     if (subtasks !== undefined) {
       subtasksUpdate = {
-        upsert: subtasks.map(sub => ({
+        upsert: subtasks.map((sub) => ({
           where: { id: sub.id ?? -1 },
           update: {
             title: sub.title,
@@ -118,7 +118,7 @@ export class TaskService {
     return this.prisma.task.update({
       where: { id },
       data: {
-        ...basicData,
+        ...basicData,          // ← dueDate is now a real Date object
         ...(tagsUpdate && { tags: tagsUpdate }),
         ...(subtasksUpdate && { subtasks: subtasksUpdate }),
       },
