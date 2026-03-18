@@ -1,3 +1,6 @@
+## Status
+✅ Project completed (March 2026) – ready for frontend integration
+
 # Task Management API
 
 Backend API built with NestJS, Prisma and PostgreSQL for managing users, tasks, tags and subtasks.
